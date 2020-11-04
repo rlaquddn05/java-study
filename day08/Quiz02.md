@@ -1,4 +1,4 @@
-## day08.Quiz02
+### day08.Quiz02
 
 > double형 4칸짜리 배열을 생성하고    
 > Scanner를 사용하여 각 원소를 입력 받음   
