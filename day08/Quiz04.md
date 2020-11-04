@@ -14,7 +14,7 @@ public class Quiz04 {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 
-		// 1. 숫자6개 입력받아 nums배열에 저장
+		// 숫자6개 입력받아 nums배열에 저장
 		int nums[] = new int[6];
 		for (int i = 0; i < nums.length; ++i) {
 			System.out.print((i + 1) + "번째 수를 입력하세요 : ");
@@ -22,7 +22,7 @@ public class Quiz04 {
 		}
 		sc.close();
 
-		// 2. 입력받은 값 중 20 이상 100 이하인 원소만 출력
+		// 입력받은 값 중 20 이상 100 이하인 원소만 출력
 		System.out.print("입력한 수 중 20 이상 100 이하인 수 : ");
 		for (int d : nums) {
 			if (d >= 20 && d <= 100) {
@@ -30,7 +30,7 @@ public class Quiz04 {
 			}
 		}
 
-		// 3. 입력받은 값 중 최대값, 최소값 출력
+		// 입력받은 값 중 최대값, 최소값 출력
 		int max = nums[0];
 		int min = nums[0];
 		for (int i = 1; i < nums.length; ++i) { // i=0 아닌 1부터 시작하면 연산횟수 감소
@@ -43,7 +43,7 @@ public class Quiz04 {
 		}
 		System.out.println("\n최대값 : " + max + "\n최소값 : " + min);
 
-		// 4. 버블 정렬 알고리즘을 활용하여 오름차순으로 정리하여 출력
+		// 버블 정렬 알고리즘을 활용하여 오름차순으로 정리하여 출력
 		int temp;
 		int i, j;
 		for (i = (nums.length - 1); i > 1; --i) {
@@ -56,7 +56,7 @@ public class Quiz04 {
 			}
 		}
 		for (int d : nums) {
-			System.out.print("오름차순  정렬 : " + d + " ");
+			System.out.print(d + " ");
 		}
 
 	}
