@@ -55,6 +55,7 @@ public class Quiz04 {
 				}
 			}
 		}
+		System.out.print("오름차순 정렬 : ");
 		for (int d : nums) {
 			System.out.print(d + " ");
 		}
