@@ -54,9 +54,11 @@ public class homework07 {
 		System.out.print("\n시작 날짜를 입력하세요(월/일): ");
 		String start = sc.nextLine();
 		int sDate[] = { 0, 0 };
-		sDate[0] = Integer.parseInt(start.split("/")[0]);
-		sDate[1] = Integer.parseInt(start.split("/")[1]);
-
+		String tempsDate [] = new String[2];
+		tempsDate = start.split("/");
+		sDate[0] = Integer.parseInt(tempsDate[0]);
+		sDate[1] = Integer.parseInt(tempsDate[1]);
+		
 		int sdday = 0;
 		for (int i = 0; i <= sDate[0] - 2; ++i) {
 			sdday += dates[i];
@@ -67,10 +69,11 @@ public class homework07 {
 		String end = sc.nextLine();
 		sc.close();
 		int eDate[] = { 0, 0 };
-		eDate[0] = Integer.parseInt(end.split("/")[0]);
-		eDate[1] = Integer.parseInt(end.split("/")[1]);
-		
-		
+		String tempeDate [] = new String[2];
+		tempeDate = end.split("/");
+		eDate[0] = Integer.parseInt(tempeDate[0]);
+		eDate[1] = Integer.parseInt(tempeDate[1]);
+
 		int edday = 0;
 		for (int i = 0; i <= eDate[0] - 2; ++i) {
 			edday += dates[i];
