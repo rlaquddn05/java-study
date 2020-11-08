@@ -40,9 +40,11 @@ public class homework07 {
 		System.out.print("날짜를 입력하세요(월/일): ");
 		String input = sc.nextLine();
 		int inDate[] = { 0, 0 };
-		inDate[0] = Integer.parseInt(input.split("/")[0]);
-		inDate[1] = Integer.parseInt(input.split("/")[1]);
-
+		String tempinDate [] = new String[2];
+		tempinDate = input.split("/");
+		inDate[0] = Integer.parseInt(tempinDate[0]);
+		inDate[1] = Integer.parseInt(tempinDate[1]);
+		
 		int dday0 = 0;
 		for (int i = 0; i <= inDate[0] - 2; ++i) {
 			dday0 += dates[i];
