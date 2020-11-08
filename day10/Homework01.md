@@ -36,14 +36,8 @@ public class Homework01 {
 			pokemon[i] = new Pokemon();
 		}
 		
-		JOptionPane.showMessageDialog(null, "처음에 포켓몬을 생성하고 시작하여야 합니다.");
-		for(int i=0; i<pokemon.length; ++i) {
-			JOptionPane.showMessageDialog(null, i+1+"번 포켓몬의 정보를 입력하세요");
-			pokemon[i].input();
-		}
-		
 		String menu = "=========메뉴========="
-				+ "\n          1. 포켓몬 다시 생성"
+				+ "\n          1. 포켓몬 생성"
 				+ "\n          2. 포켓몬 현황"
 				+ "\n          3. 레벨업"
 				+ "\n          4. 종료";
@@ -59,14 +53,18 @@ public class Homework01 {
 				}
 				
 				case "2" : { // 처음에 문제 몰라서 잘못만든거 그대로 둠
+					if( pokemon[0].lv == 0 ) { //이름은 null로 입력가능하나 lv은 1~99 제한 있음
+						JOptionPane.showMessageDialog(null, "먼저 포켓몬을 생성하셔야 합니다");
+						break;
+					}
 //					String message = "어떤 포켓몬의 정보를 확인하시겠습니까?";
 //					for(int i=0; i<pokemon.length; ++i) {
 //						message += "\n"+ (1+i)+". " + pokemon[i].name;
 //					}
 //					message += "\n6. 전부";
 //					int input2 = Integer.parseInt(JOptionPane.showInputDialog(message));
-					String info = "";
 //					if(input2 == 6) {
+						String info = "";
 						for(Pokemon p : pokemon) {
 							info += "이름 : " + p.name 
 								 + "\n레벨 : " + p.lv 
@@ -86,6 +84,10 @@ public class Homework01 {
 				}
 				
 				case "3" : {
+					if( pokemon[0].lv == 0 ) {
+						JOptionPane.showMessageDialog(null, "먼저 포켓몬을 생성하셔야 합니다");
+						break;
+					}
 					String lvUpName = JOptionPane.showInputDialog("레벨업할 포켓몬의 이름을 입력하세요");
 					int nocount=0;
 					for(Pokemon p : pokemon) {
@@ -128,4 +130,5 @@ public class Homework01 {
 	 	} // while		
 	} //메인
 } // 클래스
+
 ```
