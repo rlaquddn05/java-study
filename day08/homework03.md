@@ -33,6 +33,14 @@ public class homework03 {
 			}
 			System.out.println(array[i]+" ]");
 		}
+		
+		// String.join을 사용하는 경우(?)
+		String[] sArray;
+		sArray = new String[num];
+		for (int i = 0; i < array.length; ++i) {
+			sArray[i] = Integer.toString(array[i]);
+		}
+		System.out.println( "결과 : [ " + String.join(", ", sArray ) + " ]"  );
 	}
 }
 ```
