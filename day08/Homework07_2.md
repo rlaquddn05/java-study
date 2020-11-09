@@ -7,6 +7,11 @@
 >  String[] 변수로 split을 받고 그 뒤 정수 파싱을 두번 수행.   
 >     
 >  람다를 사용하는것도 좋다.   
+
+> 2번째 피드백   
+> String t [] = new String[2];    
+> t = s.split("/"); 을     
+> String t [] = s.split("/"); 로    
     
 ```java
 package day08.homework;
@@ -15,16 +20,14 @@ import java.util.Scanner;
 
 public class Homework07_2 {
 //	static int[] cutdate(String s, int[] a) {
-//		String t [] = new String[2];
-//		t = s.split("/");
+//		String t [] = s.split("/");
 //		a[0] = Integer.parseInt(t[0]);
 //		a[1] = Integer.parseInt(t[1]);
 //		return a;
 //	}
 		
 	static void cutdate2(String s, int[] a) {
-		String t [] = new String[2];
-		t = s.split("/");
+		String t [] = s.split("/");
 		a[0] = Integer.parseInt(t[0]);
 		a[1] = Integer.parseInt(t[1]);
 	}
