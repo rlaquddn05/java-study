@@ -1,7 +1,8 @@
 ### day08.Homework10_2
 #### jop활용
 
-```import javax.swing.JOptionPane;
+```java
+import javax.swing.JOptionPane;
 
 public class Homework10_2 {
 	public static void main(String[] args) {
