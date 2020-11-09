@@ -48,7 +48,6 @@ public class Quiz03 {
 		for(int i=0; i<students.length; ++i) {
 			System.out.println("---- 학생" + (i+1) + " ---- ");
 			students[i].printData();
-			System.out.println("\n");
 			
 		}
 		
