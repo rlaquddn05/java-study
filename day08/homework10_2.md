@@ -63,3 +63,4 @@ public class Homework10_2 {
 		}//while
 	}//메인
 }// 클래스
+```
