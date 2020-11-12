@@ -1,5 +1,5 @@
 ### day14.Homework02(lastIndex를 지역변수로 선언한 경우)
-#### -> main에서 lastInex를 조절해준다
+#### -> main에서 lastIndex를 조절해준다
 > Tourist 클래스   
 >    필드 : name, budget(예산), destination(목적지)   
 >    메서드 : 생성자 여러개 ...    
