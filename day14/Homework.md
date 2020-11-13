@@ -1,4 +1,5 @@
 ### day14.Homework01 (lastIndex를 클래스 필드로 선언한 )  
+#### 배열이 메인에 있으므로 lastIndex는 지역변수로 
 > Tourist 클래스   
 >    필드 : name, budget(예산), destination(목적지)   
 >    메서드 : 생성자 여러개 ...    
