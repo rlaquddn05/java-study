@@ -42,12 +42,11 @@ public class Homework01 {
 			}
 			
 			case "2" : {
-				++lastIndex;
 				if(lastIndex==5) {
 					JOptionPane.showMessageDialog(null, "더이상 추가할 수 없습니다");
-					--lastIndex;
 					break;
 				}
+				++lastIndex;
 				m.menu2(tourists, lastIndex);
 				break;
 			}
