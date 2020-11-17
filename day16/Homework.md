@@ -90,8 +90,8 @@ public class Quiz02 {
 			System.out.print("2p(" + units[(i+1)%2].name + ") 남은체력 : " + units[(i+1)%2].hp);
 			units[i].attack(units[(i+1)%2]);
 			System.out.println(" ==> " + units[(i+1)%2].hp);
-			if( units[(i+1)%2].getAlive() == false ) {
-				System.out.println("1p(" + units[i].name +") WIN");
+			if( !units[(i+1)%2].getAlive()) {
+				System.out.println((i+1)+"p(" + units[i].name +") WIN");
 				return;
 			}
 			}
@@ -123,8 +123,8 @@ public class Quiz02 {
 				System.out.print("2p(" + units[(i+1)%2].name + ") 남은체력 : " + units[(i+1)%2].hp);
 				units[i].attack(units[(i+1)%2]);
 				System.out.println(" ==> " + units[(i+1)%2].hp);
-				if( units[(i+1)%2].getAlive() == false ) {
-					System.out.println("1p(" + units[i].name +") WIN\n");
+				if( !units[(i+1)%2].getAlive()) {
+					System.out.println((i+1)+"p(" + units[i].name +") WIN\n");
 					if( units[i] instanceof Tank ) {
 						++tankWin;
 					}
