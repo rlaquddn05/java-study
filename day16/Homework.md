@@ -108,9 +108,9 @@ public class Quiz02 {
 		int tankWin=0;
 		for(int j=1; j <= 1000; ++j) {
 			Unit[] units = new Unit[2];
-			for( int i=0; i < units.length; ++i ) {
-				units[i] = Math.random() > 0.5 ? new Sniper() : new Tank();
-			}
+			units[j%2] = new Sniper();
+			units[(j+1)%2] = new Tank();
+			
 			System.out.println("======== < " + j + "차 시도 > ========");
 			System.out.println("1P : " + units[0].name);		
 			System.out.println("2P : " + units[1].name);
