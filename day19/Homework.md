@@ -30,7 +30,7 @@ public class Homework01 {
 			if( input.equals("-1") ) {
 				break;
 			}
-			total += input;
+			total += (" " + input);
 			++idx;
 		}
 		sc.close();
