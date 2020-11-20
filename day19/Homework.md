@@ -25,7 +25,7 @@ public class Homework01 {
 		
 		int idx = 1;
 		while (true) {
-			System.out.print(idx + 1 + "번째 문자열을 입력하세요 : ");
+			System.out.print(idx + "번째 문자열을 입력하세요 : ");
 			String input = sc.nextLine().trim();
 			if( input.equals("-1") ) {
 				break;
