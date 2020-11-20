@@ -29,7 +29,7 @@ public static void main(String[] args) {
 					++aCount;
 				}
 			}
-			charCount += inputs[idx].replace(" ", "").length();
+			charCount += inputs[idx].replace("[ \t\n\\x0B\f\r]", "").length();
 			wordCount += inputs[idx].split(" ").length;
 			++idx;
 		}
