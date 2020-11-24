@@ -88,7 +88,13 @@ public class Homework01 {
 			switch (menuInput) {
 			case "1": { // 올바르지 않은 국가명입력시 break 하고싶은데... 이건 국가명 풀을 상수로 인터페이스에 넣어야할거같은데.. 패스하겠습니다.
 				String nation = JOptionPane.showInputDialog("국가명을 입력하세요 : ");
+				if(nation == null) {
+					break;
+				}
 				String capital = JOptionPane.showInputDialog("수도명을 입력하세요 : ");
+				if(capital == null) {
+					break;
+				}
 				int population = Integer.parseInt(JOptionPane.showInputDialog("인구수를 입력하세요 : "));
 				nations.add(new Nation(nation, capital, population));
 				break;
@@ -111,6 +117,9 @@ public class Homework01 {
 					break;
 				}
 				String input3 = JOptionPane.showInputDialog("검색할 국가명을 입력").trim();
+				if(input3 == null) {
+					break;
+				}
 				for (int i = 0; i < nations.size(); ++i) {
 					if (input3.equals(nations.get(i).getNation())) {
 						JOptionPane.showMessageDialog(null, nations.get(i));
@@ -126,6 +135,9 @@ public class Homework01 {
 					break;
 				}
 				String input4 = JOptionPane.showInputDialog("제외할 국가명을 입력");
+				if(input4 == null) {
+					break;
+				}
 				for (int i = 0; i < nations.size(); ++i) {
 					if (input4.equals(nations.get(i).getNation())) {
 						nations.remove(nations.get(i));
