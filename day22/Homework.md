@@ -1,4 +1,6 @@
 ### day22.Homework
+> 시간이 조금 있어서 연습할겸 1. 문항수 입력받아 퀴즈 출제, 2. 단어제거 추가했습니다   
+>   
 ```java
 package day22.homework;
 
@@ -23,7 +25,7 @@ import javax.swing.JOptionPane;
 
 public class Homework01 {
 	public static void main(String[] args) {
-		String menu = "1. 단어 추가\n2. 단어 검색\n3. 모든 단어 보기\n4. 퀴즈 풀기 \n0. 종료";
+		String menu = "1. 단어 추가\n2. 단어 검색\n3. 모든 단어 보기\n4. 퀴즈 풀기\n5. 단어 제거\n0. 종료";
 		HashMap<String, String> words = new HashMap<>();
 		while (true) {
 			String menuInput = JOptionPane.showInputDialog(null, menu);
@@ -43,6 +45,7 @@ public class Homework01 {
 					break;
 				}
 				words.put(word.trim(), meaning.trim());
+				JOptionPane.showMessageDialog(null, "[" + word + " : " + meaning + "] 추가되었습니다.");
 				break;
 
 			}
@@ -56,7 +59,8 @@ public class Homework01 {
 					JOptionPane.showMessageDialog(null, "취소하셨습니다");
 					break;
 				}
-				if (words.containsKey((String)searchWord.trim())) {
+				searchWord = searchWord.trim();
+				if (words.containsKey(searchWord)) {
 					JOptionPane.showMessageDialog(null, searchWord + " : " + words.get(searchWord));
 					continue;
 				}
@@ -81,13 +85,45 @@ public class Homework01 {
 					break;
 				}
 				ArrayList<String> wordList = new ArrayList<>(words.values());
-				String question = wordList.get((int) (Math.random() * wordList.size()));
-				String ans = JOptionPane.showInputDialog(question);
-				if (ans == null) {
+				String sQuestionNo = JOptionPane.showInputDialog("몇문제 테스트 하시겠습니까?");
+				if (sQuestionNo == null) {
 					JOptionPane.showMessageDialog(null, "취소하셨습니다");
 					break;
 				}
-				JOptionPane.showMessageDialog(null, question.equals(words.get(ans.trim())) ? "정답!" : "땡!");
+				int questionNo = Integer.parseInt(sQuestionNo);
+				int ansCount = 0;
+				boolean correct = false;
+				for (int i = 0; i < questionNo; ++i) {
+					String question = wordList.get((int) (Math.random() * wordList.size()));
+					String ans = JOptionPane.showInputDialog(i + ". " + question);
+					if (ans == null) {
+						JOptionPane.showMessageDialog(null, "취소하셨습니다");
+						break;
+					}
+					correct = question.equals(words.get(ans.trim()));
+					if (correct) {
+						++ansCount;
+					}
+				}
+				JOptionPane.showMessageDialog(null,
+						correct ? "정답!" + "\n( 정답률 : " + ansCount + " / " + questionNo + ")" : "땡!");
+				break;
+			}
+			case "5": {
+				if (words.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "단어를 먼저 추가하세요");
+					break;
+				}
+				String deleteWord = JOptionPane.showInputDialog("제거하실 단어를 입력하세요");
+				if (deleteWord == null) {
+					JOptionPane.showMessageDialog(null, "취소하셨습니다");
+					break;
+				}
+				if (words.containsKey(deleteWord.trim())) {
+					words.remove(deleteWord);
+					continue;
+				}
+				JOptionPane.showMessageDialog(null, "없는 단어입니다");
 				break;
 			}
 			case "0": {
@@ -99,5 +135,5 @@ public class Homework01 {
 			}
 		}
 	}
-}
+}	
 ```
