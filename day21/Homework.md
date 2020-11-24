@@ -31,6 +31,7 @@ class Nation {
 	private String nation;
 	private String capital;
 	private int population;
+
 	public Nation() {
 
 	}
@@ -81,7 +82,7 @@ public class Homework01 {
 	public static void main(String[] args) {
 		ArrayList<Nation> nations = new ArrayList<Nation>();
 
-		String menu = "1. 국가 추가\n2.모든 국가 보기\n3.국가 검색\n0.종료";
+		String menu = "1. 국가 추가\n2.모든 국가 보기\n3.국가 검색\n4.국가 제외\n0.종료";
 		while (true) {
 			String menuInput = JOptionPane.showInputDialog(menu).trim();
 			switch (menuInput) {
@@ -94,7 +95,7 @@ public class Homework01 {
 			}
 			case "2": {
 				if (nations.isEmpty()) {
-					JOptionPane.showMessageDialog(null, "국가추가를 먼저 하셔야 합니다");
+					JOptionPane.showMessageDialog(null, "국가 추가를 먼저 하셔야 합니다");
 					break;
 				}
 				String allNation = "";
@@ -106,13 +107,28 @@ public class Homework01 {
 			}
 			case "3": {
 				if (nations.isEmpty()) {
-					JOptionPane.showMessageDialog(null, "국가추가를 먼저 하셔야 합니다");
+					JOptionPane.showMessageDialog(null, "국가 추가를 먼저 하셔야 합니다");
 					break;
 				}
 				String input3 = JOptionPane.showInputDialog("검색할 국가명을 입력").trim();
 				for (int i = 0; i < nations.size(); ++i) {
 					if (input3.equals(nations.get(i).getNation())) {
 						JOptionPane.showMessageDialog(null, nations.get(i));
+						continue;
+					}
+					JOptionPane.showMessageDialog(null, "미등록 국가입니다");
+				}
+				break;
+			}
+			case "4" : {
+				if (nations.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "국가 추가를 먼저 하셔야 합니다");
+					break;
+				}
+				String input4 = JOptionPane.showInputDialog("제외할 국가명을 입력");
+				for (int i = 0; i < nations.size(); ++i) {
+					if (input4.equals(nations.get(i).getNation())) {
+						nations.remove(nations.get(i));
 					}
 				}
 				break;
@@ -127,4 +143,5 @@ public class Homework01 {
 		}
 	}
 }
+
 ```
