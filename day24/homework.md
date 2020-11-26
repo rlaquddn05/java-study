@@ -1,4 +1,4 @@
-### day23.homework02
+### day24.homework
 > 19일차 숙제에 사용자 정의 예외 붙이기
 > Patternexception 추가, 아이디 비밀번호를 각각 틀렸을때 다른 메시지 출력
 
