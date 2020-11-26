@@ -1,4 +1,6 @@
 ### day23.homework
+> 학생입력파트는 스캐너로, 사용자메뉴파트는 jop로 작성     
+
 ```java
 package day23.homework;
 
