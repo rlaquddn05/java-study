@@ -310,7 +310,7 @@ public class Homework01 implements Rules {
 		try {
 		new Homework01();
 		} catch (Throwable e) {
-			JOptionPane.showMessageDialog(null, "예상하지 못한 문제발생");
+			JOptionPane.showMessageDialog(null, "예상하지 못한 문제발생"); // 혹시 잡아놓지 않은 exception 발생 시
 		}
 	}
 }
