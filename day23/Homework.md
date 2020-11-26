@@ -80,7 +80,7 @@ interface Rules {
 }
 
 public class Homework01 implements Rules {
-	public TreeMap<Integer, HashMap<String, Object>> id = new TreeMap<>();
+	public static TreeMap<Integer, HashMap<String, Object>> id = new TreeMap<>();
 
 	public void menu1() throws NullPointerException, NumberFormatException {
 		int idInput = Integer.parseInt(JOptionPane.showInputDialog("찾으시는 학생의 학번을 입력하세요").trim());
