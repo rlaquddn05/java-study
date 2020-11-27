@@ -75,8 +75,8 @@ import javax.swing.JOptionPane;
 //    4. 모든 학생 보기
 //        현재 등록되어있는 모든 학생들의 모든 정보를 출력하세요.
 interface Rules {
-	public static final String CONTACT_PATTERN = "^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$"; // 전화번호 정규식
-	public static final int ADD_STUDENT = 3; // 추가하는 학생의 수, 조정하기 편하도록
+	public static final String CONTACT_PATTERN = "^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$";
+	public static final int ADD_STUDENT = 2; // 추가하는학생수 조절해가면서 프로그램 테스트하기 쉽도록
 }
 
 public class Homework01 implements Rules {
@@ -183,8 +183,8 @@ public class Homework01 implements Rules {
 	}
 
 	public String studentInfo(int id) {
-		return "학번 : " + id + ", 이름 : " + this.id.get(id).get("name") + ", 평균 : " + this.id.get(id).get("average")
-				+ ", 등급 : " + this.id.get(id).get("grade");
+		return "학번 : " + id + ", 이름 : " + Homework01.id.get(id).get("name") + ", 평균 : "
+				+ Homework01.id.get(id).get("average") + ", 등급 : " + Homework01.id.get(id).get("grade");
 	}
 
 	public Homework01() {
@@ -224,13 +224,14 @@ public class Homework01 implements Rules {
 		s5.put("contact", "010-1111-3864");
 		id.put(202, s5);
 
-		int[] yearCount = { 3, 2, 0, 0, 0, 0 }; //학번 자동추가위해 각 학년당 인원수를 배열로 저장
+		int[] yearCount = { 3, 2, 0, 0, 0, 0 }; // 학번 자동추가위해 각 학년당 인원수를 배열로 저장
 		while (true) {
-			try {
-				for (int i = 1; i <= ADD_STUDENT; ++i) {
+			Scanner sc = new Scanner(System.in);
+			for (int i = 1; i <= ADD_STUDENT; ++i) {
+				try {
 					System.out.println("========= " + i + "번째 학생 정보 입력 =========");
 					HashMap<String, Object> hm = new HashMap<>();
-					Scanner sc = new Scanner(System.in);
+					
 					System.out.print("이름 : ");
 					String name = sc.next();
 					System.out.print("국어 : ");
@@ -242,13 +243,11 @@ public class Homework01 implements Rules {
 					System.out.print("학년 : ");
 					int year = sc.nextInt();
 					if (year < 0 || year > 6) {
-						sc.close();
 						throw new InputMismatchException();
 					}
 					System.out.print("연락처 : ");
 					String contact = sc.next();
 					if (!Pattern.matches(Rules.CONTACT_PATTERN, contact)) {
-						sc.close();
 						throw new InputMismatchException();
 					}
 					hm.put("name", name);
@@ -256,12 +255,12 @@ public class Homework01 implements Rules {
 					hm.put("grade", getGrade(kor, eng, math));
 					hm.put("contact", contact);
 					id.put(year * 100 + yearCount[year - 1] + 1, hm);
-					sc.close();
+				} catch (InputMismatchException e) {
+					System.out.println("올바른 값을 입력하세요, 다시 입력받겠습니다.");
+					--i;
 				}
-			} catch (InputMismatchException e) {
-				System.out.println("올바른 값을 입력하세요, 처음부터 다시 입력받겠습니다.");
-				continue;
 			}
+			sc.close();
 			break;
 		}
 		System.out.println("입력 완료! JOP로 넘어갑니다.");
@@ -310,10 +309,11 @@ public class Homework01 implements Rules {
 
 	public static void main(String[] args) {
 		try {
-		new Homework01();
+			new Homework01();
 		} catch (Throwable e) {
-			JOptionPane.showMessageDialog(null, "예상하지 못한 문제발생"); // 혹시 잡아놓지 않은 exception 발생 시
+			JOptionPane.showMessageDialog(null, "예상하지 못한 문제발생");
 		}
 	}
 }
+
 ```
