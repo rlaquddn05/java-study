@@ -102,7 +102,7 @@ class VendingMachine {
 
 class HumanThread extends Thread {
 	int buyCount = 0;
-	VendingMachine[] vm;
+	VendingMachine[] vm; //  이 필드를 추가함으로써 Static reference가 아닌 형태라도 vendingMachines의 레퍼런스를 받을 수 있다       
 	
 	@Override
 	public void run() { 
@@ -133,7 +133,7 @@ public class Homework {
 		for (int i = 0; i < 10; ++i) {
 			humanThreads[i] = new HumanThread();
 			humanThreads[i].setName((i + 1) + "번 사람");
-			humanThreads[i].vm = vendingMachines;
+			humanThreads[i].vm = vendingMachines; 
 			humanThreads[i].start();
 		}
 		System.out.println("사람들 전부 자판기 이용 시작!");		
