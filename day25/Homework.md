@@ -123,8 +123,8 @@ class HumanThread extends Thread {
 
 public class Homework {
 	public static void main(String[] args) {
-		VendingMachine[] vendingMachines = new VendingMachine[2]; // void 메소드인 run()에서 배열을 읽어들이기 위해 static선언
-		HumanThread[] humanThreads = new HumanThread[10]; // 이건 그냥 보기 좋으라고 같이 static
+		VendingMachine[] vendingMachines = new VendingMachine[2]; static이아니라면 지역변수로 선언하는것이 맞는것같다.
+		HumanThread[] humanThreads = new HumanThread[10]; 
 		for (int i = 0; i < 2; ++i) {
 			vendingMachines[i] = new VendingMachine();
 			vendingMachines[i].name = (i + 1) + "번 자판기";
