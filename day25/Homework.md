@@ -78,7 +78,7 @@ public class Homework {
 }
 ```
 ##### 피드백 : 자판기를 static 말고 HumanThread에 전달하는 형태로
-> HumanThread에 VendingMachine[] vm 필드를 만들고 메인에서 필드에 vendingMachines의 레퍼런스를 저장해주는 방식으로 
+> HumanThread에 VendingMachine[] vm 필드를 만들고 메인에서 필드에 vendingMachines의 레퍼런스를 저장해주는 방식으로 해결
 ```java
 package day25.homework;
 
