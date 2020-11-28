@@ -77,3 +77,65 @@ public class Homework {
 	}
 }
 ```
+##### 피드백 : 자판기를 static 말고 HumanThread에 전달하는 형태로
+> HumanThread에 VendingMachine[] vm 필드를 만들고 메인에서 필드에 vendingMachines의 레퍼런스를 저장해주는 방식으로 
+```java
+package day25.homework;
+
+class VendingMachine {
+	boolean occupancy;
+	String name;
+
+	synchronized public void sell(String name) { 
+		this.occupancy = true;
+		System.out.println(this.name + "에서 " + name + " 구매시작");
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		System.out.println(this.name + "에서 " + name + " 구매완료!");
+		this.occupancy = false;
+	}
+}
+
+class HumanThread extends Thread {
+	int buyCount = 0;
+	VendingMachine[] vm;
+	
+	@Override
+	public void run() { 
+		buy(vm);
+	}
+
+	public void buy(VendingMachine[] vendingMachines) {
+		while (buyCount < 1) {
+			for (VendingMachine vm : vendingMachines) {
+				if (vm.occupancy == false && buyCount < 1) {
+					++buyCount;
+					vm.sell(this.getName());
+				}
+			}
+		}
+	}
+}
+
+public class Homework {
+	public static void main(String[] args) {
+		VendingMachine[] vendingMachines = new VendingMachine[2]; // void 메소드인 run()에서 배열을 읽어들이기 위해 static선언
+		HumanThread[] humanThreads = new HumanThread[10]; // 이건 그냥 보기 좋으라고 같이 static
+		for (int i = 0; i < 2; ++i) {
+			vendingMachines[i] = new VendingMachine();
+			vendingMachines[i].name = (i + 1) + "번 자판기";
+		}
+
+		for (int i = 0; i < 10; ++i) {
+			humanThreads[i] = new HumanThread();
+			humanThreads[i].setName((i + 1) + "번 사람");
+			humanThreads[i].vm = vendingMachines;
+			humanThreads[i].start();
+		}
+		System.out.println("사람들 전부 자판기 이용 시작!");		
+	}
+}
+```
