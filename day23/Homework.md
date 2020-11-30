@@ -236,10 +236,19 @@ public class Homework01 implements Rules {
 					String name = sc.next();
 					System.out.print("국어 : ");
 					int kor = sc.nextInt();
+					if (kor < 0 || kor > 100) {
+						throw new InputMismatchException();
+					}
 					System.out.print("영어 : ");
 					int eng = sc.nextInt();
+					if (eng < 0 || eng > 100) {
+						throw new InputMismatchException();
+					}
 					System.out.print("수학 : ");
 					int math = sc.nextInt();
+					if (math < 0 || math > 100) {
+						throw new InputMismatchException();
+					}
 					System.out.print("학년 : ");
 					int year = sc.nextInt();
 					if (year < 0 || year > 6) {
