@@ -1,3 +1,4 @@
+### 길찾기게임
 ```java
 package day30.homework;
 
@@ -71,48 +72,79 @@ public class Homework01 extends JFrame {
 
 			@Override
 			public void keyPressed(KeyEvent e) {
-				switch (e.getKeyCode()) {
-				case KeyEvent.VK_UP: {
-					
-				}
-				case KeyEvent.VK_DOWN: {
+				if (e.getKeyCode() == KeyEvent.VK_UP) {
+					y -= 1;
+					try {
+						if (buttons[y][x].stat == 0) {
+							buttons[y][x].stat = 2;
+							buttons[y][x].setButtonColor();
+							buttons[y + 1][x].stat = 0;
+							buttons[y + 1][x].setButtonColor();
+						} else if (buttons[y][x].stat == 3) {
+							JOptionPane.showMessageDialog(null, "WIN!");
+							System.exit(0);
+						} else {
+							y += 1;
+						}
+					} catch (ArrayIndexOutOfBoundsException e1) {
+						y += 1;
+					}
+				} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
 					y += 1;
-					System.out.println(y + "," + x);
-					if (buttons[y][x].stat == 0) {
-						buttons[y][x].stat = 2;
-						buttons[y][x].setButtonColor();
-						buttons[y - 1][x].stat = 0;
-						buttons[y - 1][x].setButtonColor();
-					} else if (buttons[y][x].stat == 3) {
-						JOptionPane.showMessageDialog(null, "WIN!");
-					} else {
+					try {
+						if (buttons[y][x].stat == 0) {
+							buttons[y][x].stat = 2;
+							buttons[y][x].setButtonColor();
+							buttons[y - 1][x].stat = 0;
+							buttons[y - 1][x].setButtonColor();
+						} else if (buttons[y][x].stat == 3) {
+							JOptionPane.showMessageDialog(null, "WIN!");
+							System.exit(0);
+						} else {
+							y -= 1;
+						}
+					} catch (ArrayIndexOutOfBoundsException e1) {
 						y -= 1;
-						System.out.println("벽 " + y + "," + x);
 					}
 				}
 
-				case KeyEvent.VK_RIGHT: {
+				else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+					x += 1;
+					try {
+						if (buttons[y][x].stat == 0) {
+							buttons[y][x].stat = 2;
+							buttons[y][x].setButtonColor();
+							buttons[y][x - 1].stat = 0;
+							buttons[y][x - 1].setButtonColor();
+						} else if (buttons[y][x].stat == 3) {
+							JOptionPane.showMessageDialog(null, "WIN!");
+							System.exit(0);
+						} else {
+							x -= 1;
+						}
+					} catch (ArrayIndexOutOfBoundsException e1) {
+						x -= 1;
+					}
+				} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+					x -= 1;
+					try {
+						if (buttons[y][x].stat == 0) {
+							buttons[y][x].stat = 2;
+							buttons[y][x].setButtonColor();
+							buttons[y][x + 1].stat = 0;
+							buttons[y][x + 1].setButtonColor();
+						} else if (buttons[y][x].stat == 3) {
+							JOptionPane.showMessageDialog(null, "WIN!");
+							System.exit(0);
+						} else {
+							x += 1;
+						
+						
+						}
+					} catch (ArrayIndexOutOfBoundsException e1) {
+						x += 1;
+					}
 
-				}
-//				case KeyEvent.VK_LEFT: {
-//					x -= 1;
-//					try {
-//						if (buttons[y][x].stat == 0) {
-//							buttons[y][x + 1].stat = 0;
-//							buttons[y][x + 1].setBackground(COLOR[0]);
-//							buttons[y][x].stat = 2;
-//							buttons[y][x].setBackground(COLOR[2]);
-//						} else if (map[y][x] == 3) {
-//							JOptionPane.showMessageDialog(null, "WIN!");
-//						} else {
-//							x += 1;
-//						}
-//					} catch (ArrayIndexOutOfBoundsException e1) {
-//						x += 1;
-//					} catch (Exception e1) {
-//						e1.printStackTrace();
-//					}
-//				}
 				}
 			}
 		});
