@@ -33,10 +33,9 @@ public class Homework01 extends JFrame {
 	static class MyButton extends JButton {
 		private int stat;
 
-		public MyButton(int stat, int i, int j) {
+		public MyButton(int stat) {
 			this.stat = stat;
-			setButtonColor();
-			setText(i + "," + j);
+			setButtonColor();			
 		}
 
 		private void setButtonColor() {
@@ -54,7 +53,7 @@ public class Homework01 extends JFrame {
 		MyButton[][] buttons = new MyButton[8][8];
 		for (int i = 0; i < 8; ++i) {
 			for (int j = 0; j < 8; ++j) {
-				buttons[i][j] = new MyButton(map[i][j], i, j);
+				buttons[i][j] = new MyButton(map[i][j]);
 				buttons[i][j].setEnabled(false);
 				this.add(buttons[i][j]);
 			}
