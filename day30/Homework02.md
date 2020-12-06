@@ -1,6 +1,9 @@
 ### 달력만들기
 > - 추가해야할것 : 아직 날짜입력을 안함, 월 입력시 달력페이지 바뀌는것도 하고싶은데 아직안함   
 > - 수정하고싶은것 : 현재 daybutton마다 actionlistener 가 달려 있는데 하나로 해결하고싶은데 panel이나 frame은 actionlistener부착이 안됨..
+> - 현재 진행상황 : 1. 달력외형, popup외형      
+> 		   2. popup에서 save버튼 누르면 내용이 날짜이름으로 저장됨     
+>		   3. 달력에서 날짜 누르면 pop이 뜰 때 세이브파일이 있으면 불러옴     
 
 ```java
 package day30.homework;
@@ -235,3 +238,6 @@ public class Homework02 extends JFrame {
 	}
 }
 ```
+![달력](https://user-images.githubusercontent.com/73927722/101273519-7bd63980-37d9-11eb-85dc-7aba67f2477d.JPG)
+![popup](https://user-images.githubusercontent.com/73927722/101273520-7c6ed000-37d9-11eb-9b2f-5934f9251056.JPG)
+
