@@ -92,7 +92,8 @@ class popup extends JFrame {
 		memoPanel.add(memoTextField, BorderLayout.CENTER);
 
 		buttonsPanel.setLayout(new FlowLayout());
-
+		
+		// clear버튼 누르면 todo목록과 memo 초기화
 		clear.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -102,14 +103,16 @@ class popup extends JFrame {
 				memoTextField.setText(null);
 			}
 		});
-
+		
+		// save버튼 누르면 daybuttons에 todo 목록의 내용 text입력
+		// 				날짜이름으로 todo목록과 memo내용 세이브파일 생성
 		save.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				File folder = new File("달력프로그램\\12월");
 				folder.mkdir();
-				(Homework02.dayButtons[Homework02.popup.date]).setText("<html>"+todoTextField1.getText()+"<br>"+
-				todoTextField2.getText()+"<br>"+todoTextField3.getText()+"<br>");
+				(Homework02.dayButtons[Homework02.popup.date]).setText("<html>" + todoTextField1.getText() + "<br>"
+						+ todoTextField2.getText() + "<br>" + todoTextField3.getText() + "<br>");
 				Homework02.info.clear();
 				Homework02.info.add(todoTextField1.getText());
 				Homework02.info.add(todoTextField2.getText());
@@ -189,7 +192,7 @@ public class Homework02 extends JFrame {
 
 		JPanel[] dayPanel = new JPanel[42];
 		JLabel[] dayLabel = new JLabel[42];
-		
+
 		popup.setPopup();
 		for (int i = 0; i < 42; ++i) {
 			dayPanel[i] = new JPanel();
@@ -201,6 +204,8 @@ public class Homework02 extends JFrame {
 			dayButtons[i] = new DayButton(i);
 			dayButtons[i].setBorder(new EmptyBorder(0, 0, 0, 0));
 			dayButtons[i].setBackground(new Color(255, 255, 255));
+			
+			// daybuttons 누르면 해당일의 save파일이 있으면 불러옴, 없으면 초기화된 popup
 			dayButtons[i].addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
@@ -233,20 +238,20 @@ public class Homework02 extends JFrame {
 			daysPanel.add(dayPanel[i]);
 		}
 		
+		//프로그램 켤 때 day버튼에 todo를 붙여넣음
 		File directory = new File("달력프로그램\\12월");
 		File[] files = directory.listFiles();
 		for (File f : files) {
-			try (FileInputStream fIn = new FileInputStream(f);
-					ObjectInputStream oIn = new ObjectInputStream(fIn);) {
+			try (FileInputStream fIn = new FileInputStream(f); ObjectInputStream oIn = new ObjectInputStream(fIn);) {
 				info = (ArrayList<String>) oIn.readObject();
-				(dayButtons[Integer.parseInt(f.getName())]).setText("<html>"+info.get(0)+"<br>"+
-						info.get(1)+"<br>"+info.get(2)+"<br>");
-			
+				(dayButtons[Integer.parseInt(f.getName())])
+						.setText("<html>" + info.get(0) + "<br>" + info.get(1) + "<br>" + info.get(2) + "<br>");
+
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
 		}
-		
+
 		setVisible(true);
 	}
 
