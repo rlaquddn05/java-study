@@ -33,7 +33,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 class popup extends JFrame {
-	String date;
+	int date;
 	JLabel dateLabel = new JLabel();
 	JLabel todoLabel = new JLabel("  < To do >");
 	JTextField todoTextField1 = new JTextField(" 1. ");
@@ -49,7 +49,7 @@ class popup extends JFrame {
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setLayout(new BorderLayout());
 
-		dateLabel.setText(this.date);
+		dateLabel.setText(Integer.toString(this.date));
 		dateLabel.setHorizontalAlignment(JLabel.CENTER);
 		dateLabel.setFont(new Font("맑은 고딕", Font.BOLD, 30));
 		JPanel panel = new JPanel();
@@ -106,15 +106,17 @@ class popup extends JFrame {
 		save.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				File folder = new File("달력프로그램");
+				File folder = new File("달력프로그램\\12월");
 				folder.mkdir();
+				(Homework02.dayButtons[Homework02.popup.date]).setText("<html>"+todoTextField1.getText()+"<br>"+
+				todoTextField2.getText()+"<br>"+todoTextField3.getText()+"<br>");
 				Homework02.info.clear();
 				Homework02.info.add(todoTextField1.getText());
 				Homework02.info.add(todoTextField2.getText());
 				Homework02.info.add(todoTextField3.getText());
 				Homework02.info.add(memoTextField.getText());
 
-				try (FileOutputStream fOut = new FileOutputStream("달력프로그램\\" + dateLabel.getText());
+				try (FileOutputStream fOut = new FileOutputStream("달력프로그램\\12월\\" + dateLabel.getText());
 						ObjectOutputStream oOut = new ObjectOutputStream(fOut);) {
 					oOut.writeObject(Homework02.info);
 				} catch (Exception e1) {
@@ -134,12 +136,12 @@ class popup extends JFrame {
 }
 
 class DayButton extends JButton {
-	String date;
+	int date;
 
 	DayButton() {
 	}
 
-	DayButton(String date) {
+	DayButton(int date) {
 		this.date = date;
 	}
 }
@@ -147,7 +149,8 @@ class DayButton extends JButton {
 @SuppressWarnings("serial")
 public class Homework02 extends JFrame {
 	private JLabel monthLabel = new JLabel("12월");
-	private popup popup = new popup();
+	public static DayButton[] dayButtons = new DayButton[42];
+	public static popup popup = new popup();
 	public static ArrayList<String> info = new ArrayList<>();
 
 	Homework02() {
@@ -186,7 +189,7 @@ public class Homework02 extends JFrame {
 
 		JPanel[] dayPanel = new JPanel[42];
 		JLabel[] dayLabel = new JLabel[42];
-		DayButton[] dayButton = new DayButton[42];
+		
 		popup.setPopup();
 		for (int i = 0; i < 42; ++i) {
 			dayPanel[i] = new JPanel();
@@ -195,15 +198,15 @@ public class Homework02 extends JFrame {
 			dayLabel[i] = new JLabel(i + "칸");
 			dayLabel[i].setFont(new Font("맑은 고딕", Font.BOLD, 15));
 			dayLabel[i].setHorizontalAlignment(JLabel.RIGHT);
-			dayButton[i] = new DayButton(i + "칸");
-			dayButton[i].setBorder(new EmptyBorder(0, 0, 0, 0));
-			dayButton[i].setBackground(new Color(255, 255, 255));
-			dayButton[i].addActionListener(new ActionListener() {
+			dayButtons[i] = new DayButton(i);
+			dayButtons[i].setBorder(new EmptyBorder(0, 0, 0, 0));
+			dayButtons[i].setBackground(new Color(255, 255, 255));
+			dayButtons[i].addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					popup.date = ((DayButton) e.getSource()).date;
-					popup.dateLabel.setText(popup.date);
-					try (FileInputStream fIn = new FileInputStream("달력프로그램\\" + popup.dateLabel.getText());
+					popup.dateLabel.setText(Integer.toString(popup.date));
+					try (FileInputStream fIn = new FileInputStream("달력프로그램\\12월\\" + popup.dateLabel.getText());
 							ObjectInputStream oIn = new ObjectInputStream(fIn);) {
 						info = (ArrayList<String>) oIn.readObject();
 						popup.todoTextField1.setText(info.get(0));
@@ -224,12 +227,26 @@ public class Homework02 extends JFrame {
 			});
 
 			dayPanel[i].add(dayLabel[i], BorderLayout.NORTH);
-			dayPanel[i].add(dayButton[i], BorderLayout.CENTER);
+			dayPanel[i].add(dayButtons[i], BorderLayout.CENTER);
 			dayPanel[i].setBorder(new LineBorder(new Color(0, 0, 0), 1));
 
 			daysPanel.add(dayPanel[i]);
 		}
-
+		
+		File directory = new File("달력프로그램\\12월");
+		File[] files = directory.listFiles();
+		for (File f : files) {
+			try (FileInputStream fIn = new FileInputStream(f);
+					ObjectInputStream oIn = new ObjectInputStream(fIn);) {
+				info = (ArrayList<String>) oIn.readObject();
+				(dayButtons[Integer.parseInt(f.getName())]).setText("<html>"+info.get(0)+"<br>"+
+						info.get(1)+"<br>"+info.get(2)+"<br>");
+			
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+		}
+		
 		setVisible(true);
 	}
 
