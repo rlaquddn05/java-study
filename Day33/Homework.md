@@ -214,3 +214,46 @@ MariaDB [testdb]> SELECT * FROM pokemon;
 +----+----------+-------+------+------+---------------------+
 10 rows in set (0.000 sec)
 ```
+#### 숙제2
+```MySQL
+MariaDB [testdb]> CREATE TABLE member(
+    ->     `no` INT PRIMARY KEY AUTO_INCREMENT,
+    ->     `id` VARCHAR(20) NOT NULL UNIQUE,
+    ->     `password` VARCHAR(21),
+    ->     `email` VARCHAR(40) UNIQUE,
+    ->     `type` INT(1) CHECK (type >=1 AND type <=4),
+    ->     `point` INT(7) DEFAULT 1000 CHECK (point >0));
+Query OK, 0 rows affected (0.022 sec)
+
+MariaDB [testdb]> DESC member;
++----------+-------------+------+-----+---------+----------------+
+| Field    | Type        | Null | Key | Default | Extra          |
++----------+-------------+------+-----+---------+----------------+
+| no       | int(11)     | NO   | PRI | NULL    | auto_increment |
+| id       | varchar(20) | NO   | UNI | NULL    |                |
+| password | varchar(21) | YES  |     | NULL    |                |
+| email    | varchar(40) | YES  | UNI | NULL    |                |
+| type     | int(1)      | YES  |     | NULL    |                |
+| point    | int(7)      | YES  |     | 1000    |                |
++----------+-------------+------+-----+---------+----------------+
+6 rows in set (0.046 sec)
+
+MariaDB [testdb]> CREATE TABLE QNA (
+    ->    no INT PRIMARY KEY AUTO_INCREMENT,
+    ->    writer_no INT(9),
+    ->    content VARCHAR(100) NOT NULL,
+    ->     regdate DATETIME DEFAULT CURRENT_TIMESTAMP,
+    ->    FOREIGN KEY(writer_no) REFERENCES member(no) ON DELETE CASCADE
+    ->    );
+Query OK, 0 rows affected (0.018 sec)
+
+MariaDB [testdb]> DESC QNA;
++-----------+--------------+------+-----+---------------------+----------------+
+| Field     | Type         | Null | Key | Default             | Extra          |
++-----------+--------------+------+-----+---------------------+----------------+
+| no        | int(11)      | NO   | PRI | NULL                | auto_increment |
+| writer_no | int(9)       | YES  | MUL | NULL                |                |
+| content   | varchar(100) | NO   |     | NULL                |                |
+| regdate   | datetime     | YES  |     | current_timestamp() |                |
++-----------+--------------+------+-----+---------------------+----------------+
+4 rows in set (0.027 sec)
