@@ -1,5 +1,9 @@
 ### 포켓몬 추가/조회
 #### 처음부터 GUI로 구현/ 1,2번 모두 GUI로 구현
+> 14일 오전 수정사항    
+> 입력하지 않는 textfield editable(false)로 변경    
+> 입력하지 않고 계산, 추가, 조회 수행할경우 예외처리
+> 레벨에 정수 입력하지 않는 경우 예외처리
 
 ```java
 package day35.homework;
@@ -78,6 +82,7 @@ public class Homework01 extends JFrame {
 		panel3.setLayout(new BorderLayout());
 		panel3.add(new JLabel("  HP.   "), BorderLayout.WEST);
 		JTextField textfield3 = new JTextField();
+		textfield3.setEditable(false);
 		panel3.add(textfield3, BorderLayout.CENTER);
 		addPokemonData.add(panel3);
 
@@ -85,6 +90,7 @@ public class Homework01 extends JFrame {
 		panel4.setLayout(new BorderLayout());
 		panel4.add(new JLabel("  AP.   "), BorderLayout.WEST);
 		JTextField textfield4 = new JTextField();
+		textfield4.setEditable(false);
 		panel4.add(textfield4, BorderLayout.CENTER);
 		addPokemonData.add(panel4);
 
@@ -92,9 +98,19 @@ public class Homework01 extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				try {
+				if(textfield2.getText().length()!=0) { // if(textfield2.getText()!="")하면 에러...?
+					System.out.println(textfield2.getText());
 				int lv = Integer.parseInt(textfield2.getText());
 				textfield3.setText(Integer.toString(lv * 100));
 				textfield4.setText(Double.toString(lv * 0.5));
+				} else {
+					JOptionPane.showMessageDialog(Homework01.this, "이름과 레벨을 입력하신 뒤 계산을 수행하세요");
+				}
+				} catch (NumberFormatException e1) {
+					JOptionPane.showMessageDialog(Homework01.this, "레벨은 정수값을 입력하셔야 합니다");
+				}
+			
 			}
 		});
 
@@ -104,6 +120,8 @@ public class Homework01 extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				if(textfield3.getText().length()!=0) {
+				
 				try {
 					Class.forName("com.mysql.jdbc.Driver");
 				} catch (ClassNotFoundException e1) {
@@ -111,15 +129,7 @@ public class Homework01 extends JFrame {
 				}
 
 				try {
-					if (textfield1 == null || textfield2 == null) {
-						JOptionPane.showMessageDialog(null, "이름과 레벨을 입력하신 뒤 계산버튼을 눌러주세요");
-						throw new NullPointerException();
-					}
-					if (textfield3 == null || textfield4 == null) {
-						JOptionPane.showMessageDialog(null, "체력과 공격력 계산을 먼저 수행하세요");
-						throw new NullPointerException();
-					}
-
+					
 					connection = DriverManager.getConnection(URL, ID, PASSWORD);
 
 					String sql = "INSERT INTO pokemon VALUES(NULL, '" + textfield1.getText() + "',"
@@ -132,7 +142,6 @@ public class Homework01 extends JFrame {
 
 					System.out.println("저장 완료!");
 
-				} catch (NullPointerException e1) {
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				} finally {
@@ -146,6 +155,9 @@ public class Homework01 extends JFrame {
 					}
 				}
 
+			} else {
+				JOptionPane.showMessageDialog(Homework01.this, "계산을 먼저 수행한 뒤 추가를 해주세요");
+			}
 			}
 		});
 		
@@ -172,6 +184,7 @@ public class Homework01 extends JFrame {
 		panel02.setLayout(new BorderLayout());
 		panel02.add(new JLabel("  Lv.   "), BorderLayout.WEST);
 		JTextField textfield02 = new JTextField();
+		textfield02.setEditable(false);
 		panel02.add(textfield02, BorderLayout.CENTER);
 		referencePokemonData.add(panel02);
 
@@ -179,6 +192,7 @@ public class Homework01 extends JFrame {
 		panel03.setLayout(new BorderLayout());
 		panel03.add(new JLabel("  HP.   "), BorderLayout.WEST);
 		JTextField textfield03 = new JTextField();
+		textfield03.setEditable(false);
 		panel03.add(textfield03, BorderLayout.CENTER);
 		referencePokemonData.add(panel03);
 
@@ -186,6 +200,7 @@ public class Homework01 extends JFrame {
 		panel04.setLayout(new BorderLayout());
 		panel04.add(new JLabel("  AP.   "), BorderLayout.WEST);
 		JTextField textfield04 = new JTextField();
+		textfield04.setEditable(false);
 		panel04.add(textfield04, BorderLayout.CENTER);
 		referencePokemonData.add(panel04);
 		
@@ -195,16 +210,22 @@ public class Homework01 extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
 				try {
 					connection = DriverManager.getConnection(URL, ID, PASSWORD);
 					preparedStatement = connection.prepareStatement("SELECT level, hp, ap FROM pokemon WHERE name ='" + textfield01.getText()+"'");
 					resultSet = preparedStatement.executeQuery();
 				
 					while(resultSet.next()) {
+						
 						textfield02.setText(Integer.toString(resultSet.getInt(1)));
 						textfield03.setText(Integer.toString(resultSet.getInt(2)));
-						textfield04.setText(Integer.toString(resultSet.getInt(3)));				
+						textfield04.setText(Integer.toString(resultSet.getInt(3)));	
+			
 					}
+				if(resultSet.next()==false) { 
+					JOptionPane.showMessageDialog(Homework01.this, "미등록 포켓몬");
+				}
 					
 				} catch (SQLException e1) {					
 					e1.printStackTrace();
@@ -220,4 +241,5 @@ public class Homework01 extends JFrame {
 		new Homework01();
 	}
 }
+
 ```
